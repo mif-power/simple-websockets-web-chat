@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  web-chat:
+    build: .
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    environment:
+      - FLASK_ENV=production
+    # Optional: add volumes for persistent logs or data if needed
+    # volumes:
+    #   - ./chat.log:/app/chat.log
