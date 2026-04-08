@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
+from datetime import datetime
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
@@ -15,8 +16,15 @@ def index():
 @socketio.on('message')
 def handle_message(data):
     # data: { 'msg': str, 'user': str }
-    messages.append(data)
-    emit('message', data, broadcast=True)
+    # Add timestamp to the message
+    timestamp = datetime.now().strftime("%H:%M")
+    message_with_timestamp = {
+        'msg': data['msg'],
+        'user': data['user'],
+        'timestamp': timestamp
+    }
+    messages.append(message_with_timestamp)
+    emit('message', message_with_timestamp, broadcast=True)
 
 @socketio.on('connect')
 def handle_connect():
