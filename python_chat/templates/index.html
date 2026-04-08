@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Простой веб-чат</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+        #chat-container { max-width: 600px; margin: 0 auto; }
+        #messages { height: 400px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; }
+        #form-container { display: flex; }
+        #message-input { flex: 1; padding: 10px; font-size: 16px; }
+        #send-button { padding: 10px 20px; font-size: 16px; }
+        #name-prompt { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.8); 
+            color: white; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            z-index: 1000; 
+        }
+        #name-input { 
+            padding: 10px; 
+            font-size: 18px; 
+            width: 200px; 
+            margin: 10px; 
+        }
+        #name-submit { 
+            padding: 10px 20px; 
+            font-size: 18px; 
+            background: #007bff; 
+            color: white; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer; 
+        }
+        #name-submit:hover { background: #0056b3; }
+        .message { margin-bottom: 10px; padding: 8px; border-radius: 4px; }
+        .user { font-weight: bold; }
+        .timestamp { font-size: 0.8em; color: #666; }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <h1>Групповой чат</h1>
+        <div id="messages"></div>
+        <div id="form-container">
+            <input type="text" id="message-input" placeholder="Введите сообщение...">
+            <button id="send-button">Отправить</button>
+        </div>
+    </div>
+
+    <div id="name-prompt">
+        <div>
+            <h2>Введите ваше имя</h2>
+            <input type="text" id="name-input" placeholder="Ваше имя">
+            <button id="name-submit">Войти в чат</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const socket = io();
+            const messagesDiv = document.getElementById('messages');
+            const messageInput = document.getElementById('message-input');
+            const sendButton = document.getElementById('send-button');
+            const namePrompt = document.getElementById('name-prompt');
+            const nameInput = document.getElementById('name-input');
+            const nameSubmit = document.getElementById('name-submit');
+
+            // Check for saved name
+            let userName = localStorage.getItem('chatUserName');
+            if (!userName || userName.trim() === '') {
+                // Show name prompt
+                namePrompt.style.display = 'flex';
+            } else {
+                // Hide name prompt and join chat
+                namePrompt.style.display = 'none';
+                joinChat(userName);
+            }
+
+            function joinChat(name) {
+                userName = name.trim();
+                if (userName) {
+                    localStorage.setItem('chatUserName', userName);
+                    namePrompt.style.display = 'none';
+                    // Emit join event or just proceed
+                    // We'll send name with each message
+                }
+            }
+
+            // Get history when connected
+            socket.on('history', function(msgs) {
+                messagesDiv.innerHTML = '';
+                msgs.forEach(function(msg) {
+                    const msgDiv = document.createElement('div');
+                    msgDiv.className = 'message';
+                    msgDiv.innerHTML = `<span class="user">${msg.user || 'Аноним'}:</span> <span>${msg.msg}</span> <span class="timestamp">Just now</span>`;
+                    messagesDiv.appendChild(msgDiv);
+                });
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            });
+
+            // Receive new messages
+            socket.on('message', function(msg) {
+                const msgDiv = document.createElement('div');
+                msgDiv.className = 'message';
+                msgDiv.innerHTML = `<span class="user">${msg.user || 'Аноним'}:</span> <span>${msg.msg}</span> <span class="timestamp">Just now</span>`;
+                messagesDiv.appendChild(msgDiv);
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            });
+
+            // Send message
+            function sendMessage() {
+                const msg = messageInput.value.trim();
+                if (msg && userName && userName.trim() !== '') {
+                    socket.emit('message', { msg: msg, user: userName });
+                    messageInput.value = '';
+                } else if (!userName || userName.trim() === '') {
+                    // Show name prompt again if needed
+                    namePrompt.style.display = 'flex';
+                    nameInput.focus();
+                }
+            }
+
+            sendButton.addEventListener('click', sendMessage);
+            messageInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+
+            // Name submit
+            nameSubmit.addEventListener('click', function() {
+                const name = nameInput.value.trim();
+                if (name) {
+                    joinChat(name);
+                } else {
+                    alert('Пожалуйста, введите имя');
+                }
+            });
+
+            nameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    const name = nameInput.value.trim();
+                    if (name) {
+                        joinChat(name);
+                    } else {
+                        alert('Пожалуйста, введите имя');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
