@@ -31,7 +31,7 @@ def handle_message(data):
     db.session.add(msg_entry)
     db.session.commit()
     # Emit with timestamp formatted
-    timestamp_str = msg_entry.timestamp.strftime("%H:%M")
+    timestamp_str = msg_entry.timestamp.strftime("%d.%m %H:%M")
     emit('message', {
         'msg': msg_entry.msg,
         'user': msg_entry.user,
@@ -49,7 +49,7 @@ def handle_connect():
         history.append({
             'msg': m.msg,
             'user': m.user,
-            'timestamp': m.timestamp.strftime("%H:%M")
+            'timestamp': m.timestamp.strftime("%d.%m %H:%M")
         })
     emit('history', history)
 

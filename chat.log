@@ -1,0 +1,47 @@
+nohup: ignoring input
+/home/agent/python_chat/venv/lib64/python3.14/site-packages/engineio/async_drivers/eventlet.py:1: EventletDeprecationWarning: 
+Eventlet is deprecated. It is currently being maintained in bugfix mode, and
+we strongly recommend against using it for new projects.
+
+If you are already using Eventlet, we recommend migrating to a different
+framework.  For more detail see
+https://eventlet.readthedocs.io/en/latest/asyncio/migration.html
+
+  from eventlet.green.threading import Event
+ * Restarting with stat
+/home/agent/python_chat/venv/lib64/python3.14/site-packages/engineio/async_drivers/eventlet.py:1: EventletDeprecationWarning: 
+Eventlet is deprecated. It is currently being maintained in bugfix mode, and
+we strongly recommend against using it for new projects.
+
+If you are already using Eventlet, we recommend migrating to a different
+framework.  For more detail see
+https://eventlet.readthedocs.io/en/latest/asyncio/migration.html
+
+  from eventlet.green.threading import Event
+ * Debugger is active!
+ * Debugger PIN: 591-602-936
+(316091) wsgi starting up on http://0.0.0.0:5000
+(316091) accepted ('192.168.2.13', 45364)
+192.168.2.13 - - [09/Apr/2026 23:26:45] "GET /socket.io/?EIO=4&transport=polling&t=PrpxG9t HTTP/1.1" 200 300 0.000534
+192.168.2.13 - - [09/Apr/2026 23:26:45] "POST /socket.io/?EIO=4&transport=polling&t=PrpxGA5&sid=9eDpvkH2lhrzgzYyAAAA HTTP/1.1" 200 221 0.013067
+(316091) accepted ('192.168.2.13', 45372)
+(316091) accepted ('192.168.2.13', 45376)
+(316091) accepted ('192.168.2.13', 45390)
+192.168.2.13 - - [09/Apr/2026 23:26:45] "GET /socket.io/?EIO=4&transport=polling&t=PrpxGA7&sid=9eDpvkH2lhrzgzYyAAAA HTTP/1.1" 200 181 0.000276
+192.168.2.13 - - [09/Apr/2026 23:26:45] "GET / HTTP/1.1" 200 6514 0.011391
+192.168.2.13 - - [09/Apr/2026 23:26:45] "GET /socket.io/?EIO=4&transport=polling&t=PrpxGAb&sid=9eDpvkH2lhrzgzYyAAAA HTTP/1.1" 200 181 0.000230
+192.168.2.13 - - [09/Apr/2026 23:26:45] "GET /socket.io/?EIO=4&transport=polling&t=PrpxGAo&sid=9eDpvkH2lhrzgzYyAAAA HTTP/1.1" 200 181 0.000348
+192.168.2.13 - - [09/Apr/2026 23:26:46] "GET /favicon.ico HTTP/1.1" 404 355 0.001906
+192.168.2.13 - - [09/Apr/2026 23:26:46] "GET /socket.io/?EIO=4&transport=polling&t=PrpxGDu HTTP/1.1" 200 300 0.000659
+(316091) accepted ('192.168.2.13', 45404)
+192.168.2.13 - - [09/Apr/2026 23:26:46] "POST /socket.io/?EIO=4&transport=polling&t=PrpxGEK&sid=e_Abq6KVIKTq3KpCAAAC HTTP/1.1" 200 221 0.004528
+192.168.2.13 - - [09/Apr/2026 23:26:46] "GET /socket.io/?EIO=4&transport=polling&t=PrpxGEM&sid=e_Abq6KVIKTq3KpCAAAC HTTP/1.1" 200 230 0.000523
+(316091) accepted ('192.168.2.13', 45412)
+192.168.2.13 - - [09/Apr/2026 23:26:46] "GET /socket.io/?EIO=4&transport=polling&t=PrpxGEo&sid=e_Abq6KVIKTq3KpCAAAC HTTP/1.1" 200 181 0.012568
+(316091) accepted ('192.168.2.13', 45360)
+(316091) accepted ('192.168.2.13', 45420)
+192.168.2.13 - - [09/Apr/2026 23:26:49] "GET /socket.io/?EIO=4&transport=polling&t=PrpxGwt HTTP/1.1" 200 300 0.000596
+192.168.2.13 - - [09/Apr/2026 23:26:49] "POST /socket.io/?EIO=4&transport=polling&t=PrpxG-p&sid=wdyXhSQBx3eo0XVvAAAE HTTP/1.1" 200 221 0.006248
+(316091) accepted ('192.168.2.13', 45422)
+(316091) accepted ('192.168.2.13', 45428)
+192.168.2.13 - - [09/Apr/2026 23:26:49] "GET /socket.io/?EIO=4&transport=polling&t=PrpxG-q&sid=wdyXhSQBx3eo0XVvAAAE HTTP/1.1" 200 181 0.000313
