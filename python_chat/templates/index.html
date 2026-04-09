@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Простой веб-чат</title>
+    <title>Техподдержка Digital Resistor</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
@@ -48,7 +48,7 @@
 </head>
 <body>
     <div id="chat-container">
-        <h1>Групповой чат</h1>
+        <h1>Техподдержка Digital Resistor</h1>
         <div id="messages"></div>
         <div id="form-container">
             <input type="text" id="message-input" placeholder="Введите сообщение...">
@@ -101,7 +101,7 @@
                 msgs.forEach(function(msg) {
                     const msgDiv = document.createElement('div');
                     msgDiv.className = 'message';
-                    msgDiv.innerHTML = `<span class="user">${msg.user || 'Аноним'}:</span> <span>${msg.msg}</span> <span class="timestamp">Just now</span>`;
+                    msgDiv.innerHTML = `<span class="user">${msg.user || 'Аноним'}:</span> <span>${msg.msg}</span> <span class="timestamp">${msg.timestamp}</span>`;
                     messagesDiv.appendChild(msgDiv);
                 });
                 messagesDiv.scrollTop = messagesDiv.scrollHeight;
@@ -111,7 +111,7 @@
             socket.on('message', function(msg) {
                 const msgDiv = document.createElement('div');
                 msgDiv.className = 'message';
-                msgDiv.innerHTML = `<span class="user">${msg.user || 'Аноним'}:</span> <span>${msg.msg}</span> <span class="timestamp">Just now</span>`;
+                msgDiv.innerHTML = `<span class="user">${msg.user || 'Аноним'}:</span> <span>${msg.msg}</span> <span class="timestamp">${msg.timestamp}</span>`;
                 messagesDiv.appendChild(msgDiv);
                 messagesDiv.scrollTop = messagesDiv.scrollHeight;
             });
